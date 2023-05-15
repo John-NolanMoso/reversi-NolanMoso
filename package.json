@@ -1,0 +1,26 @@
+{
+  "name": "reversi-nolanmoso",
+  "version": "0.0.1",
+  "description": "web version of reversii",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/John-NolanMoso/reversi-NolanMoso.git"
+  },
+  "keywords": [
+    "reversii"
+  ],
+  "author": "John Nolan-Moso",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/John-NolanMoso/reversi-NolanMoso/issues"
+  },
+  "homepage": "https://github.com/John-NolanMoso/reversi-NolanMoso#readme",
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "socket.io": "^4.6.1"
+  }
+}

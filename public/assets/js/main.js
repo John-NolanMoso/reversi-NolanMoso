@@ -59,9 +59,17 @@ function makeInvitedButton(socket_id) {
     return newNode;
 }
 
-function makePlayButton() {
+function makePlayButton(socket_id) {
     let newHTML = "<button type='button' class='btn btn-success'>Play</button>";
     let newNode = $(newHTML);
+    newNode.click( () => {
+        let payload = {
+            requested_user: socket_id
+        }
+        console.log('**** Client log message, sending \'game_start\' command: ' + JSON.stringify(payload));
+        socket.emit('game_start', payload);
+    }
+    );
     return newNode;
 }
 
@@ -93,7 +101,7 @@ socket.on('invited', (payload) => {
         console.log(payload.message);
         return;
     }
-    let newNode = makePlayButton();
+    let newNode = makePlayButton(payload.socket_id);
     $('.socket_' + payload.socket_id + ' button').replaceWith(newNode);
 })  
 
@@ -108,6 +116,21 @@ socket.on('uninvited', (payload) => {
     }
     let newNode = makeInviteButton(payload.socket_id);
     $('.socket_' + payload.socket_id + ' button').replaceWith(newNode);
+})  
+
+socket.on('game_start_response', (payload) => {
+    if((typeof payload == 'undefined') || (payload === null)) {
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail') {
+        console.log(payload.message);
+        return;
+    }
+    let newNode = makeStartGameButton();
+    $('.socket_' + payload.socket_id + ' button').replaceWith(newNode);
+    /*jump to the game page*/
+    window.location.href = 'game.html?username=' + username + '&game_id=' + payload.game_id;
 })  
 
 socket.on('join_room_response', (payload) => {

@@ -1,9 +1,9 @@
 body {
-    background-color: #902fa3;
+    background-color: rgb(68, 196, 124);
 }
 
 .headerrow, #messagePane {
-    background-color: #b940d2;
+    background-color: #ce32edd9;
   }
 
   .join_room_response,

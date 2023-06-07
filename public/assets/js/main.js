@@ -277,11 +277,39 @@ socket.on('game_update', (payload) => {
         return;
     }
 
-    $("#my_color").html('<h3 id="my_color">I am ' + my_color + '</h3>')
+
+    if( my_color === 'white') {
+         $("#my_color").html('<h3 id="my_color">I am White</h3>');
+    }
+    else if( my_color === 'black') {
+        $("#my_color").html('<h3 id="my_color">I am Black</h3>');
+    }
+    else{
+        $("#my_color").html('<h3 id="my_color">Error: I don\'t know what color I am</h3>');
+    }
+
+    if( payload.game.whose_turn === 'white') {
+        $("#my_color").append('<h4>It is white\'s turn</h4>');
+   }
+   else if( payload.game.whose_turn === 'black') {
+       $("#my_color").append('<h4>It is black\'s turn</h4>');
+   }
+   else{
+       $("#my_color").append('<h4>Error: Don\'t know whose turn it is/h4>');
+   }
+
+   let whitesum = 0;
+   let blacksum = 0;
 
     /*Animate changes to board*/
     for (let row = 0; row < 8; row++) {
         for (let column = 0; column < 8; column++) {
+            if (board[row][column] === 'w') {
+                whitesum++;
+            }
+            else if (board[row][column] == 'b') {
+                blacksum++;
+            }
             /* check to see if the server changed any space on the board*/
             if (old_board[row][column] !== board[row][column]) {
                 let graphic = "";
@@ -351,6 +379,8 @@ socket.on('game_update', (payload) => {
             }
         }
     }
+    $("#whitesum").html(whitesum);
+    $("#blacksum").html(blacksum);
     old_board = board
 })
 
@@ -361,6 +391,7 @@ socket.on('play_token_response', (payload) => {
     }
     if (payload.result === 'fail') {
         console.log(payload.message);
+        alert(payload.message);
         return;
     }
 })

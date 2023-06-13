@@ -1,9 +1,9 @@
 body {
-    background-color: rgb(133, 230, 235);
+    background-color: #F2E0C9;
 }
 
 .headerrow, #messagePane {
-    background-color: #ce32edd9;
+    background-color: #02595995;
   }
 
   .join_room_response,
@@ -13,7 +13,7 @@ body {
   .chat_message {
     font: size 125%;
     margin: 1px 1px 1px 1px;
-    color:rgb(14, 18, 105)
+    color:#04ADBF
   }
 
   table#game_board{
